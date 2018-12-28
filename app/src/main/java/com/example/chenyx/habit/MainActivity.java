@@ -75,7 +75,7 @@ public class MainActivity extends BaseActivity {
         habitDatas = new ArrayList<>();
         poslist = new ArrayList<>();
         homeAdapter = new MyAdapter(MainActivity.this, habitDatas);
-        HabitHepler habitHepler = habit_all.getMyhebithelper();
+        final HabitHepler habitHepler = habit_all.getMyhebithelper();
         SQLiteDatabase db=habitHepler.getReadableDatabase();
         Cursor cursor=db.query("habit",null,null,null,null,null,null);
 
@@ -228,11 +228,18 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 Calendar c = Calendar.getInstance();
+                int mYear = c.get(Calendar.YEAR); // 获取当前年份
+                int mMonth = c.get(Calendar.MONTH) + 1;// 获取当前月份
+                int mDay = c.get(Calendar.DAY_OF_MONTH);// 获取当日期
                 if (habitDatas.size()==0){
                     Toast.makeText(MainActivity.this, "目前没有未打卡的习惯", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    showTimePickerDialog(MainActivity.this,c,habitDatas.get(0),1);
+                    for(int i=0;i<habitDatas.size();i++){
+                        if (!habitDatas.get(i).get_manager().find(mYear,mMonth,mDay)) {
+                            showTimePickerDialog(MainActivity.this, c, habitDatas.get(i), 1);
+                        }
+                    }
                 }
                 //showTimePickerDialog(MainActivity.this,c,habit);
             }
