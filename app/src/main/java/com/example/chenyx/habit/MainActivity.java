@@ -132,7 +132,22 @@ public class MainActivity extends BaseActivity {
         homeAdapter.buttonSetOnclick(new MyAdapter.ButtonInterface() {
             @Override
             public void onclick(View view,int position) {
+
+//                habitDatas.get(poslist.indexOf(position)).get_manager().insert(2018,11,21);
+//                habitDatas.get(poslist.indexOf(position)).get_manager().insert(2018,11,22);
+//
+//                habitDatas.get(poslist.indexOf(position)).get_manager().insert(2018,12,9);
+//                habitDatas.get(poslist.indexOf(position)).get_manager().insert(2018,12,10);
+//                habitDatas.get(poslist.indexOf(position)).get_manager().insert(2018,12,11);
+//                habitDatas.get(poslist.indexOf(position)).get_manager().insert(2018,12,12);
+//                habitDatas.get(poslist.indexOf(position)).get_manager().insert(2018,12,13);
+//                habitDatas.get(poslist.indexOf(position)).get_manager().insert(2018,12,14);
+//                habitDatas.get(poslist.indexOf(position)).get_manager().insert(2018,12,15);
+//                habitDatas.get(poslist.indexOf(position)).get_manager().insert(2018,12,17);
+//                habitDatas.get(poslist.indexOf(position)).get_manager().insert(2018,12,18);
+//                habitDatas.get(poslist.indexOf(position)).get_manager().insert(2018,12,19);
                 habitDatas.get(poslist.indexOf(position)).get_manager().insert();
+
                 //homeAdapter.notifyDataSetChanged();
                 Toast.makeText(MainActivity.this, "打卡成功", Toast.LENGTH_SHORT).show();
             }
