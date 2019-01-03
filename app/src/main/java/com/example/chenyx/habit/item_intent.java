@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.view.menu.MenuView;
@@ -43,6 +44,7 @@ import lecho.lib.hellocharts.view.LineChartView;
 
 public class item_intent extends  AppCompatActivity  {
     private Toolbar mToolbar;
+    private AppBarLayout mAppBarLayout;
     private ListView mListView;
     private  LineChartView lineChartView;
     MyBaseAdapter myBaseAdapter;
@@ -83,7 +85,8 @@ public class item_intent extends  AppCompatActivity  {
         mTxtDate = (TextView) findViewById(R.id.txt_date);
         mCalendarView = (CalendarView) findViewById(R.id.calendarView);
 
-
+        mToolbar.setTitle(intent.getStringExtra("habit_name"));
+        setSupportActionBar(mToolbar);
         // 设置已选的日期
         mCalendarView.setSelectDate(initData());
 
@@ -95,88 +98,55 @@ public class item_intent extends  AppCompatActivity  {
         // 设置字体
         mCalendarView.setTypeface(Typeface.SERIF);
 
-        // 设置日期状态改变监听
-        mCalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            @Override
-            public void onSelectedDayChange(@NonNull CalendarView view, boolean select, int year, int month, int day) {
-                Log.e(TAG, "select: " + select);
-                Log.e(TAG, "year: " + year);
-                Log.e(TAG, "month,: " + (month + 1));
-                Log.e(TAG, "day: " + day);
-
-                if(select){
-                    Toast.makeText(getApplicationContext()
-                            , "选中了：" + year + "年" + (month + 1) + "月" + day + "日", Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(getApplicationContext()
-                            , "取消选中了：" + year + "年" + (month + 1) + "月" + day + "日", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+//        // 设置日期状态改变监听
+//        mCalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+//            @Override
+//            public void onSelectedDayChange(@NonNull CalendarView view, boolean select, int year, int month, int day) {
+//                Log.e(TAG, "select: " + select);
+//                Log.e(TAG, "year: " + year);
+//                Log.e(TAG, "month,: " + (month + 1));
+//                Log.e(TAG, "day: " + day);
+//
+//                if(select){
+//                    Toast.makeText(getApplicationContext()
+//                            , "选中了：" + year + "年" + (month + 1) + "月" + day + "日", Toast.LENGTH_SHORT).show();
+//                }else{
+//                    Toast.makeText(getApplicationContext()
+//                            , "取消选中了：" + year + "年" + (month + 1) + "月" + day + "日", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
         // 设置是否能够改变日期状态
         mCalendarView.setChangeDateStatus(false);
 
-        // 设置日期点击监听
-        mCalendarView.setOnDataClickListener(new CalendarView.OnDataClickListener() {
-            @Override
-            public void onDataClick(@NonNull CalendarView view, int year, int month, int day) {
-                Log.e(TAG, "year: " + year);
-                Log.e(TAG, "month,: " + (month + 1));
-                Log.e(TAG, "day: " + day);
-            }
-        });
-        // 设置是否能够点击
-        mCalendarView.setClickable(false);
-
-        setCurDate();mTxtDate = (TextView) findViewById(R.id.txt_date);
-        mCalendarView = (CalendarView) findViewById(R.id.calendarView);
-
-
-        // 设置已选的日期
-        mCalendarView.setSelectDate(initData());
-
-        // 指定显示的日期, 如当前月的下个月
-        //Calendar calendar = mCalendarView.getCalendar();
-        // calendar.add(Calendar.MONTH, 2);
-        // mCalendarView.setCalendar(calendar);
-
-        // 设置字体
-        mCalendarView.setTypeface(Typeface.SERIF);
-
-        // 设置日期状态改变监听
-        mCalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            @Override
-            public void onSelectedDayChange(@NonNull CalendarView view, boolean select, int year, int month, int day) {
-                Log.e(TAG, "select: " + select);
-                Log.e(TAG, "year: " + year);
-                Log.e(TAG, "month,: " + (month + 1));
-                Log.e(TAG, "day: " + day);
-
-                if(select){
-                    Toast.makeText(getApplicationContext()
-                            , "选中了：" + year + "年" + (month + 1) + "月" + day + "日", Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(getApplicationContext()
-                            , "取消选中了：" + year + "年" + (month + 1) + "月" + day + "日", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-        // 设置是否能够改变日期状态
-        mCalendarView.setChangeDateStatus(false);
-
-        // 设置日期点击监听
-        mCalendarView.setOnDataClickListener(new CalendarView.OnDataClickListener() {
-            @Override
-            public void onDataClick(@NonNull CalendarView view, int year, int month, int day) {
-                Log.e(TAG, "year: " + year);
-                Log.e(TAG, "month,: " + (month + 1));
-                Log.e(TAG, "day: " + day);
-            }
-        });
+//        // 设置日期点击监听
+//        mCalendarView.setOnDataClickListener(new CalendarView.OnDataClickListener() {
+//            @Override
+//            public void onDataClick(@NonNull CalendarView view, int year, int month, int day) {
+//                Log.e(TAG, "year: " + year);
+//                Log.e(TAG, "month,: " + (month + 1));
+//                Log.e(TAG, "day: " + day);
+//            }
+//        });
         // 设置是否能够点击
         mCalendarView.setClickable(false);
 
         setCurDate();
+    }
+
+
+    void init()
+    {
+        mListView=(ListView)findViewById(R.id.listview);
+        mListView.setAdapter(myBaseAdapter);
+        setListViewHeightBasedOnChildren(mListView);
+        mListView.setFocusable(false);
+        mToolbar=(Toolbar)findViewById(R.id.toolbar2);
+        mAppBarLayout=(AppBarLayout)findViewById(R.id.toolbar);
+        lineChartView=(LineChartView)findViewById(R.id.line_chart);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
     }
 
     @Override
@@ -272,19 +242,6 @@ public class item_intent extends  AppCompatActivity  {
                 break;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    void init()
-    {
-        mListView=(ListView)findViewById(R.id.listview);
-        mListView.setAdapter(myBaseAdapter);
-        setListViewHeightBasedOnChildren(mListView);
-        mListView.setFocusable(false);
-        mToolbar=(Toolbar)findViewById(R.id.toolbar2);
-        lineChartView=(LineChartView)findViewById(R.id.line_chart);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
     }
 
 

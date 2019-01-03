@@ -10,6 +10,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.os.Vibrator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -171,13 +172,15 @@ public class MainActivity extends BaseActivity {
                 intent.putExtra("list",(Serializable)signData_list);
                 intent.putExtra("habit_id",habit.getHabit_id());
                 intent.putExtra("pos",poslist.indexOf(position));
+                intent.putExtra("habit_name",habit.getHabit_name());
                 startActivityForResult(intent,1);
                 //Toast.makeText(MainActivity.this, ""+habitDatas.get(poslist.indexOf(position)).getHabit_id(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onItemLongClick(View view, int position) {
-
+                Vibrator vibrator = (Vibrator) MainActivity.this.getSystemService(MainActivity.this.VIBRATOR_SERVICE);
+                vibrator.vibrate(300);
             }
         });
 
