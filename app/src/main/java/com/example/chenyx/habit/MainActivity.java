@@ -181,6 +181,7 @@ public class MainActivity extends BaseActivity {
             public void onItemLongClick(View view, int position) {
                 Vibrator vibrator = (Vibrator) MainActivity.this.getSystemService(MainActivity.this.VIBRATOR_SERVICE);
                 vibrator.vibrate(50);
+
             }
         });
 
