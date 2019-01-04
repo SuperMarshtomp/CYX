@@ -180,7 +180,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onItemLongClick(View view, int position) {
                 Vibrator vibrator = (Vibrator) MainActivity.this.getSystemService(MainActivity.this.VIBRATOR_SERVICE);
-                vibrator.vibrate(300);
+                vibrator.vibrate(50);
             }
         });
 
